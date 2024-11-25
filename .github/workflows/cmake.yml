@@ -2,10 +2,9 @@ name: CMake (Linux, macOS, Windows)
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-  workflow_dispatch:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
