@@ -23,7 +23,7 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install Dependencies
         run: sudo apt-get install libx11-xcb-dev libxcb-util-dev libxcb-cursor-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev libfontconfig1-dev libcairo2-dev libgtkmm-3.0-dev libsqlite3-dev libxcb-keysyms1-dev
@@ -42,9 +42,17 @@ jobs:
         working-directory: ${{github.workspace}}/build
         shell: bash
         run: ctest --verbose -C ${{env.BUILD_TYPE}}
-
-      - name: Upload
-        uses: actions/upload-artifact@v2
+        
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
         with:
-          name: build-VST3-${{env.BUILD_TYPE}}
-          path: build/VST3/${{env.BUILD_TYPE}}
+          type: 'zip'
+          directory: "build/VST3/${{env.BUILD_TYPE}}"
+          filename: "${{ github.event.repository.name }}-${{ matrix.os }}-${{ github.ref_name }}.zip"
+        
+      - name: Release prebuilt
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/VST3/${{env.BUILD_TYPE}}/${{ github.event.repository.name }}-${{ matrix.os }}-${{ github.ref_name }}.zip"
+          allowUpdates: true
+          token: ${{ secrets.GITHUB_TOKEN }}
