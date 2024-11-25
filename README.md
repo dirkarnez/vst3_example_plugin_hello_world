@@ -1,6 +1,6 @@
 # Hello World VST 3
 
-[![CMake (Linux, macOS, Windows)](https://github.com/steinbergmedia/vst3_example_plugin_hello_world/actions/workflows/cmake.yml/badge.svg)](https://github.com/steinbergmedia/vst3_example_plugin_hello_world/actions/workflows/cmake.yml)
+[![CMake (Linux, macOS, Windows)](https://github.com/dirkarnez/vst3_example_plugin_hello_world/actions/workflows/cmake.yml/badge.svg)](https://github.com/dirkarnez/vst3_example_plugin_hello_world/actions/workflows/cmake.yml)
 
 ## Introduction
 
